@@ -31,14 +31,19 @@ void Scene::Update(double dt) {
 
 
 Intro::Intro() :
-      font(0)
+      font(0),
+      font_28days(0),
+      font_nuclear(0),
+      font_snow(0)
 {}
 
 
 
 bool Intro::Init(EagleGraphicsContext* win) {
    font = win->GetFont("Data/Fonts/Verdana.ttf" , -72);
-
+   font_28days = win->GetFont("Data/Fonts/28DaysLater.ttf" , -108);
+   font_nuclear = win->GetFont("Data/Fonts/CFNuclearWarRegular.ttf" , -108);
+   font_snow  = win->GetFont("Data/Fonts/ChristmasSnow.ttf" , -232);
    return true;
 }
 
@@ -46,10 +51,9 @@ bool Intro::Init(EagleGraphicsContext* win) {
 
 void Intro::Display(EagleGraphicsContext* win) {
 ///   win->Clear();
-   int a = 255*(elapsed/10.0);
-   if (a > 255) {a = 255;}
-   win->DrawTextString(font , StringPrintF("MARS COLONY ALPHA") , 960 , 515 , EagleColor(255,64,64,a) , HALIGN_CENTER , VALIGN_BOTTOM);
-   win->DrawTextString(font , StringPrintF("DEUS EX MOKKANISTA") , 960 , 565 , EagleColor(192,32,32,a) , HALIGN_CENTER , VALIGN_TOP);
+   int a = (elapsed>=10)?255:255*(elapsed/10.0);
+   win->DrawTextString(font_28days , StringPrintF("MARS COLONY ALPHA") , 960 , 515 , EagleColor(255,64,64,a) , HALIGN_CENTER , VALIGN_BOTTOM);
+   win->DrawTextString(font_nuclear , StringPrintF("DEUS EX MOKKANISTA") , 960 , 565 , EagleColor(192,32,32,a) , HALIGN_CENTER , VALIGN_TOP);
 ///   win->FlipDisplay();
 }
 
