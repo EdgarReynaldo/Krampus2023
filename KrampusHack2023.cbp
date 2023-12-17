@@ -69,6 +69,8 @@
 					<Add option="-lpsapi" />
 					<Add option="-lopengl32" />
 					<Add option="-lglu32" />
+					<Add option="-ldsound" />
+					<Add option="-lsharpyuv" />
 					<Add option="-luser32" />
 					<Add option="-lcomdlg32" />
 					<Add option="-lgdi32" />
@@ -138,7 +140,7 @@
 			<Add option="-DEAGLE_LOG" />
 			<Add option="-DEAGLE_ASSERT_EXCEPTION" />
 			<Add option="-DDEBUG" />
-			<Add directory="E:/usr64/libs/EagleGUI/examples/KRAMPUS23/include" />
+			<Add directory="include" />
 			<Add directory="E:/usr64/include" />
 		</Compiler>
 		<Linker>
