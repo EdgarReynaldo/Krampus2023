@@ -28,18 +28,18 @@ bool Game::Init(std::vector<std::string> args) {
    
    dman = dynamic_cast<Allegro5DialogManager*>(sys->GetDialogManager());
    
-   Allegro5SoundManager sandman;
-   soundman = &sandman;
    
-   
-   
-   EagleGraphicsContext* win = sys->CreateGraphicsContext("Our Window" , 640 , 480 , EAGLE_OPENGL | EAGLE_WINDOWED);
+   win = sys->CreateGraphicsContext("Our Window" , 640 , 480 , EAGLE_OPENGL | EAGLE_FULLSCREEN_WINDOW);
    
    EAGLE_ASSERT(win && win->Valid());
    
    win->Clear();
    win->FlipDisplay();
    
+   screen_set.push_back(new Intro());
+   screen_vec.push_back(screen_set[0]);
+   screen_set[0]->Init(win);
+
    return true;
 }
 

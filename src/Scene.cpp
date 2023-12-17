@@ -37,7 +37,7 @@ Intro::Intro() :
 
 
 bool Intro::Init(EagleGraphicsContext* win) {
-   font = win->GetFont("Data/Fonts/Verdana.ttf" , -40);
+   font = win->GetFont("Data/Fonts/Verdana.ttf" , -72);
 
    return true;
 }
@@ -45,12 +45,12 @@ bool Intro::Init(EagleGraphicsContext* win) {
 
 
 void Intro::Display(EagleGraphicsContext* win) {
-   win->Clear();
+///   win->Clear();
    int a = 255*(elapsed/10.0);
    if (a > 255) {a = 255;}
-   win->DrawTextString(font , StringPrintF("MARS COLONY ALPHA") , 960 , 535 , EagleColor(255,64,64,a) , HALIGN_CENTER , VALIGN_BOTTOM);
-   win->DrawTextString(font , StringPrintF("DEUS EX MOKKANISTA") , 960 , 535 , EagleColor(192,32,32,a) , HALIGN_CENTER , VALIGN_BOTTOM);
-   win->FlipDisplay();
+   win->DrawTextString(font , StringPrintF("MARS COLONY ALPHA") , 960 , 515 , EagleColor(255,64,64,a) , HALIGN_CENTER , VALIGN_BOTTOM);
+   win->DrawTextString(font , StringPrintF("DEUS EX MOKKANISTA") , 960 , 565 , EagleColor(192,32,32,a) , HALIGN_CENTER , VALIGN_TOP);
+///   win->FlipDisplay();
 }
 
 
