@@ -50,11 +50,15 @@ bool Intro::Init(EagleGraphicsContext* win) {
 
 
 void Intro::Display(EagleGraphicsContext* win) {
-///   win->Clear();
    int a = (elapsed>=10)?255:255*(elapsed/10.0);
-   win->DrawTextString(font_28days , StringPrintF("MARS COLONY ALPHA") , 960 , 515 , EagleColor(255,64,64,a) , HALIGN_CENTER , VALIGN_BOTTOM);
-   win->DrawTextString(font_nuclear , StringPrintF("DEUS EX MOKKANISTA") , 960 , 565 , EagleColor(192,32,32,a) , HALIGN_CENTER , VALIGN_TOP);
-///   win->FlipDisplay();
+   if (elapsed <= 10.0) {
+      win->DrawTextString(font_28days , StringPrintF("MARS COLONY ALPHA") , 960 , 515 , EagleColor(255,64,64,a) , HALIGN_CENTER , VALIGN_BOTTOM);
+      win->DrawTextString(font_nuclear , StringPrintF("DEUS EX MOKKANISTA") , 960 , 565 , EagleColor(192,32,32,a) , HALIGN_CENTER , VALIGN_TOP);
+   }
+   else if (elapsed <= 20.0) {
+      win->DrawTextString(font_snow , StringPrintF("Krampus Hack") , 960 , 510 , EagleColor(255,255,255,255) , HALIGN_CENTER , VALIGN_BOTTOM);
+      win->DrawTextString(font_snow , StringPrintF("2023") , 960 , 570 , EagleColor(255,255,255,255) , HALIGN_CENTER , VALIGN_TOP);
+   }
 }
 
 

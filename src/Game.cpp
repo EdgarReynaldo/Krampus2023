@@ -29,7 +29,7 @@ bool Game::Init(std::vector<std::string> args) {
    dman = dynamic_cast<Allegro5DialogManager*>(sys->GetDialogManager());
    
    
-   win = sys->CreateGraphicsContext("Our Window" , 640 , 480 , EAGLE_OPENGL | EAGLE_FULLSCREEN_WINDOW);
+   win = sys->CreateGraphicsContext("Our Window" , 1920 , 1080 , EAGLE_OPENGL | EAGLE_FULLSCREEN);
    
    EAGLE_ASSERT(win && win->Valid());
    
