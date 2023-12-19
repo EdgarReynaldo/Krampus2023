@@ -2,8 +2,8 @@
 
 
 
-#ifndef Resources_HPP
-#define Resources_HPP
+#ifndef GaneResources_HPP
+#define GameResources_HPP
 
 #include <map>
 #include <vector>

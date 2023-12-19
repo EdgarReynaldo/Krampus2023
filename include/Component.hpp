@@ -6,6 +6,12 @@
 #define Component_HPP
 
 
+#include "Resources.hpp"
+
+
+#include "Eagle/Events.hpp"
+
+class EagleGraphicsContext;
 
 
 
@@ -26,9 +32,10 @@ public :
 Component() :
       logic_count(0),
       ticks_per_upkeep(600),
-      income(),
-      cost()
-{}   
+      upkeep_count(0),
+      income_per_turn(),
+      cost_per_turn()
+{}
    
    virtual ~Component() {}
    

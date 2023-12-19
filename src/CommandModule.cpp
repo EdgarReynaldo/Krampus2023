@@ -7,33 +7,21 @@
 
 
 
-
-bool CommandModule::HandleCommand(std::string arg) {
-   
-}
-
-
-
 void CommandModule::HandleEvent(EagleEvent e) {
-   
+   (void)e;
 }
 
 
 
 void CommandModule::Display(EagleGraphicsContext* win) {
-   
+   (void)win;
 }
 
 
 
 void CommandModule::Update(int timer_ticks) {
-   
+   (void)timer_ticks;
    
 }
 
-
-
-bool CommandModule::operator()(std::string arg) {
-   return HandleCommand(arg);
-}
 

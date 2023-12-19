@@ -4,13 +4,12 @@
 
 #include "Component.hpp"
 #include "Eagle/GraphicsContext.hpp"
-#include "Eagle/Events.hpp"
 
 
 
 
 
-void Componenet::LogicTick() {
+void Component::LogicTick() {
    logic_count++;
    if (logic_count >= ticks_per_upkeep) {
       logic_count -= ticks_per_upkeep;
