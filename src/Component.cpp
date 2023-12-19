@@ -10,6 +10,13 @@
 
 
 
+void Componenet::LogicTick() {
+   logic_count++;
+   if (logic_count >= ticks_per_upkeep) {
+      logic_count -= ticks_per_upkeep;
+      upkeep_count++;
+   }
+}
 
 
 

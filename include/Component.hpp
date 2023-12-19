@@ -13,19 +13,12 @@ class Component {
 
    int logic_count;
    int ticks_per_upkeep;
+   int upkeep_count;
 
    ResourceTracker income_per_turn;
    ResourceTracker cost_per_turn;
 
    virtual void LogicTick();
-void Componenet::LogicTick() {
-   logic_count++;
-   if (logic_count >= ticks_per_upkeep) {
-      logic_count -= ticks_per_upkeep;
-      
-   }
-   
-}
    
 public :
    
