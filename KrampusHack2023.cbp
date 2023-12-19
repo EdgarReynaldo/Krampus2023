@@ -150,13 +150,17 @@
 		<Unit filename="include/CommandModule.hpp" />
 		<Unit filename="include/Component.hpp" />
 		<Unit filename="include/Game.hpp" />
+		<Unit filename="include/Hexagon.hpp" />
 		<Unit filename="include/Resources.hpp" />
 		<Unit filename="include/Scene.hpp" />
+		<Unit filename="include/Territory.hpp" />
 		<Unit filename="src/CommandModule.cpp" />
 		<Unit filename="src/Component.cpp" />
 		<Unit filename="src/Game.cpp" />
+		<Unit filename="src/Hexagon.cpp" />
 		<Unit filename="src/Resources.cpp" />
 		<Unit filename="src/Scene.cpp" />
+		<Unit filename="src/Territory.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
