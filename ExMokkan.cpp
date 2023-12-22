@@ -27,6 +27,17 @@ christmas snow
 
 #include "Eagle/backends/Allegro5Backend.hpp"
 
+#include "ExMokkan.hpp"
+Allegro5System* sys = 0;
+Allegro5GraphicsContext* win = 0;
+Allegro5FileSystem* fsys = 0;
+Allegro5DialogManager* dman = 0;
+Allegro5SoundManager* soundman = 0;
+
+
+
+
+
 #include "Game.hpp"
 
 
@@ -40,7 +51,23 @@ int main(int argc , char** argv) {
       args.push_back(argv[i]);
       ++i;
    }
-   
+   sys = GetAllegro5System();
+
+   int ret = sys->Initialize(EAGLE_FULL_SETUP);
+   if (ret != EAGLE_FULL_SETUP) {
+      EAGLE_ASSERT(ret & EAGLE_STANDARD_SETUP);
+      EagleLog() << "Failed init states : " << std::endl;
+      PrintFailedEagleInitStates(EAGLE_FULL_SETUP , ret);
+   }
+   win = dynamic_cast<Allegro5GraphicsContext*>(sys->CreateGraphicsContext("A5 window" , 960 , 600 , EAGLE_FULLSCREEN_WINDOW , -1 , -1));
+   EAGLE_ASSERT(win);
+
+   fsys = dynamic_cast<Allegro5FileSystem*>(sys->GetFileSystem());
+
+   dman = dynamic_cast<Allegro5DialogManager*>(sys->GetDialogManager());
+
+   soundman = new Allegro5SoundManager();
+
    bool quit = false;
 
    while (!quit) {
@@ -49,6 +76,9 @@ int main(int argc , char** argv) {
       game.Run();
       quit = game.Quit();
    }
+
+   delete soundman;
+   soundman = 0;
 
    return 0;
 }

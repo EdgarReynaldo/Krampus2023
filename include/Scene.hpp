@@ -17,16 +17,16 @@ public :
 
    Scene();
    virtual ~Scene() {}
-   
-   virtual bool Init(EagleGraphicsContext* win)=0;
 
-   virtual void Display(EagleGraphicsContext* win)=0;
+   virtual bool Init()=0;
+
+   virtual void Display()=0;
    virtual bool HandleEvent(EagleEvent e);
    virtual void Update(double dt);
 };
 
 class Intro : public Scene {
-   
+
 protected :
    EagleFont* font;
    EagleFont* font_28days;
@@ -34,14 +34,26 @@ protected :
    EagleFont* font_snow;
 public :
    Intro();
-   
-   virtual bool Init(EagleGraphicsContext* win) override;
-   
-   virtual void Display(EagleGraphicsContext* win) override;
-   
-   
+
+   virtual bool Init() override;
+
+   virtual void Display() override;
+
+
 };
 
+#include "Hexagon.hpp"
+
+class GameScene : public Scene {
+protected :
+   HexGrid grid;
+public :
+
+   virtual bool Init();
+   virtual void Display();
+   virtual bool HandleEvent(EagleEvent e);
+   virtual void Update(double dt);
+};
 
 
 #endif // Screen_HPP

@@ -8,37 +8,21 @@
 
 #include "Resources.hpp"
 #include "Scene.hpp"
-
+#include "ExMokkan.hpp"
 
 
 
 
 bool Game::Init(std::vector<std::string> args) {
-   
+
    (void)args;
-   
-   
-   sys = GetAllegro5System();
-   EAGLE_ASSERT(sys);
-   
-   int sysret = sys->Initialize(EAGLE_FULL_SETUP);
-   EAGLE_ASSERT(sysret & EAGLE_STANDARD_SETUP);
-   
-   fsys = GetAllegro5FileSystem();
-   
-   dman = dynamic_cast<Allegro5DialogManager*>(sys->GetDialogManager());
-   
-   
-   win = sys->CreateGraphicsContext("Our Window" , 1920 , 1080 , EAGLE_OPENGL | EAGLE_FULLSCREEN);
-   
-   EAGLE_ASSERT(win && win->Valid());
-   
+
    win->Clear();
    win->FlipDisplay();
-   
+
    screen_set.push_back(new Intro());
    screen_vec.push_back(screen_set[0]);
-   screen_set[0]->Init(win);
+   screen_set[0]->Init();
 
    return true;
 }
@@ -51,7 +35,7 @@ void Game::Run() {
       if (redraw) {
          win->Clear();
          for (unsigned int i = 0 ; i < screen_vec.size() ; ++i) {
-            screen_vec[i]->Display(win);
+            screen_vec[i]->Display();
          }
          win->FlipDisplay();
          redraw = false;

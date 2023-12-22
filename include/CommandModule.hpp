@@ -2,8 +2,6 @@
 
 
 
-
-
 #ifndef CommandModule_HPP
 #define CommandModule_HPP
 
@@ -15,8 +13,8 @@
 
 class CommandModule : public Component {
 protected :
-   
-public :   
+
+public :
    virtual void HandleEvent(EagleEvent e) override;
 
    virtual void Display(EagleGraphicsContext* win) override;
