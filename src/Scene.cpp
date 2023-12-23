@@ -23,8 +23,9 @@ bool Scene::HandleEvent(EagleEvent e) {
 
 
 
-void Scene::Update(double dt) {
+int Scene::Update(double dt) {
    elapsed += dt;
+   return SCENE_RUNNING;
 }
 
 
@@ -42,13 +43,17 @@ Intro::Intro() :
 
 
 
-bool Intro::Init() {
+int Intro::Init() {
    EAGLE_ASSERT(win);
    font = win->GetFont("Data/Fonts/Verdana.ttf" , -72);
    font_28days = win->GetFont("Data/Fonts/28DaysLater.ttf" , -108);
    font_nuclear = win->GetFont("Data/Fonts/CFNuclearWarRegular.ttf" , -108);
    font_snow  = win->GetFont("Data/Fonts/ChristmasSnow.ttf" , -232);
-   return true;
+   
+   if (font && font_28days && font_nuclear && font_snow) {
+      return SCENE_READY;
+   }
+   return SCENE_NOT_READY;
 }
 
 
@@ -67,10 +72,20 @@ void Intro::Display() {
 }
 
 
-bool GameScene::Init() {
-   EAGLE_ASSERT(win);
+
+int Intro::Update(double dt) {
+   (void)Scene::Update(dt);
+   if (elapsed > 20.0) {
+      return SCENE_QUIT;
+   }
+   return SCENE_RUNNING;
+}
+
+
+
+int GameScene::Init() {
    grid.Resize(60 , 60 , 32.0);
-   return true;
+   return SCENE_READY;
 }
 
 
@@ -88,8 +103,12 @@ bool GameScene::HandleEvent(EagleEvent e) {
 }
 
 
-void GameScene::Update(double dt) {
-   (void)dt;
+int GameScene::Update(double dt) {
+   Scene::Update(dt);
+   if (elapsed > 10.0) {
+      return SCENE_QUIT;
+   }
+   return SCENE_RUNNING;
 }
 
 
