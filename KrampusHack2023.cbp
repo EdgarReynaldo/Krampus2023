@@ -4,6 +4,7 @@
 	<Project>
 		<Option title="KrampusHack2023" />
 		<Option pch_mode="2" />
+		<Option default_target="Debug" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
@@ -94,6 +95,9 @@
 					<Add option="-O2" />
 				</Compiler>
 				<Linker>
+					<Add option="-s" />
+					<Add option="-static-libstdc++" />
+					<Add option="-static-libgcc" />
 					<Add option="-lEagleA5" />
 					<Add option="-lEagle" />
 					<Add option="-lallegro_monolith-static" />
@@ -106,11 +110,13 @@
 					<Add option="-lvorbis" />
 					<Add option="-lfreetype" />
 					<Add option="-logg" />
+					<Add option="-lsharpyuv" />
 					<Add option="-lpng16" />
 					<Add option="-lzlibstatic" />
 					<Add option="-lgdiplus" />
 					<Add option="-luuid" />
 					<Add option="-lkernel32" />
+					<Add option="-ldsound" />
 					<Add option="-lwinmm" />
 					<Add option="-lpsapi" />
 					<Add option="-lopengl32" />
@@ -124,9 +130,6 @@
 					<Add option="-lws2_32" />
 					<Add option="-lshlwapi" />
 					<Add option="-lpthread" />
-					<Add option="-static-libstdc++" />
-					<Add option="-static-libgcc" />
-					<Add option="-s" />
 				</Linker>
 			</Target>
 		</Build>
@@ -141,14 +144,15 @@
 			<Add option="-DEAGLE_ASSERT_EXCEPTION" />
 			<Add option="-DDEBUG" />
 			<Add directory="include" />
-			<Add directory="E:/usr64/include" />
+			<Add directory="C:/usr64/include" />
 		</Compiler>
 		<Linker>
-			<Add directory="E:/usr64/lib" />
+			<Add directory="C:/usr64/lib" />
 		</Linker>
 		<Unit filename="ExMokkan.cpp" />
 		<Unit filename="include/CommandModule.hpp" />
 		<Unit filename="include/Component.hpp" />
+		<Unit filename="include/ExMokkan.hpp" />
 		<Unit filename="include/Game.hpp" />
 		<Unit filename="include/Hexagon.hpp" />
 		<Unit filename="include/Resources.hpp" />

@@ -22,23 +22,17 @@ class Scene;
 class Game {
 protected :
    bool quit;
-
    bool redraw;
 
-
    std::vector<Scene*> screen_set;
-
    std::vector<Scene*> screen_vec;
+
+   Scene* nextscene;
+
 
 public :
 //   Game();
-Game() :
-      quit(false),
-      redraw(true),
-      screen_set(),
-      screen_vec()
-{
-}
+   Game();
 
    bool Init(std::vector<std::string> args);
    void Run();

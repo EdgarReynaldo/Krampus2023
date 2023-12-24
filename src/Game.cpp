@@ -13,6 +13,16 @@
 
 
 
+Game::Game() :
+      quit(false),
+      redraw(true),
+      screen_set(),
+      screen_vec(),
+      nextscene(0)
+{}
+
+
+
 bool Game::Init(std::vector<std::string> args) {
 
    (void)args;
@@ -21,8 +31,15 @@ bool Game::Init(std::vector<std::string> args) {
    win->FlipDisplay();
 
    screen_set.push_back(new Intro());
+   screen_set.push_back(new GameScene());
    screen_vec.push_back(screen_set[0]);
-   screen_set[0]->Init();
+   nextscene = screen_set[1];
+   if (screen_set[0]->Init() && screen_set[1]->Init()) {
+
+   }
+   else {
+      EagleError() << "Failed to initialize all screens." << std::endl;
+   }
 
    return true;
 }
@@ -47,7 +64,12 @@ void Game::Run() {
          }
          else if (e.type == EAGLE_EVENT_KEY_DOWN && e.keyboard.keycode == EAGLE_KEY_ESCAPE) {
             if (!screen_vec.empty()) {
-               screen_vec.pop_back();
+               if (nextscene) {
+                  screen_vec.back() = nextscene;
+               }
+               else {
+                  screen_vec.pop_back();
+               }
                redraw = true;
             }
             else {
@@ -56,12 +78,26 @@ void Game::Run() {
          }
          else if (e.type == EAGLE_EVENT_TIMER) {
             for (int i = screen_vec.size() - 1 ; i >= 0 ; --i) {
-               screen_vec[i]->Update(e.timer.eagle_timer_source->SPT());
+               if (screen_vec[i]->Update(e.timer.eagle_timer_source->SPT()) == SCENE_QUIT) {
+                  if (nextscene) {
+                     screen_vec[i] = nextscene;
+                  }
+                  else {
+                     std::vector<Scene*>::iterator it = screen_vec.begin();
+                     int j = i;
+                     while (j--) {
+                        ++it;
+                     }
+                     screen_vec.erase(it);
+                  }
+               }
             }
             redraw = true;
          }
          for (int i = screen_vec.size() - 1 ; i >= 0 ; --i) {
-            screen_vec[i]->HandleEvent(e);
+            if (screen_vec[i]->HandleEvent(e)) {
+               break;
+            }
          }
       } while (!sys->UpToDate());
    }
