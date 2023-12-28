@@ -144,10 +144,10 @@
 			<Add option="-DEAGLE_ASSERT_EXCEPTION" />
 			<Add option="-DDEBUG" />
 			<Add directory="include" />
-			<Add directory="C:/usr64/include" />
+			<Add directory="E:/usr64/include" />
 		</Compiler>
 		<Linker>
-			<Add directory="C:/usr64/lib" />
+			<Add directory="E:/usr64/lib" />
 		</Linker>
 		<Unit filename="ExMokkan.cpp" />
 		<Unit filename="include/CommandModule.hpp" />
