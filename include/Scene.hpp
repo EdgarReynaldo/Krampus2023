@@ -36,10 +36,6 @@ public :
 class Intro : public Scene {
 
 protected :
-   EagleFont* font;
-   EagleFont* font_28days;
-   EagleFont* font_nuclear;
-   EagleFont* font_snow;
 public :
    Intro();
 
