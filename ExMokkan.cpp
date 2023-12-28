@@ -35,6 +35,10 @@ Allegro5DialogManager* dman = 0;
 Allegro5SoundManager* soundman = 0;
 
 
+EagleFont* font = 0;
+EagleFont* font_28days = 0;
+EagleFont* font_nuclear = 0;
+EagleFont* font_snow = 0;
 
 
 
@@ -68,6 +72,12 @@ int main(int argc , char** argv) {
 
    soundman = new Allegro5SoundManager();
 
+   font = win->GetFont("Data/Fonts/Verdana.ttf" , -72);
+   font_28days = win->GetFont("Data/Fonts/28DaysLater.ttf" , -108);
+   font_nuclear = win->GetFont("Data/Fonts/CFNuclearWarRegular.ttf" , -108);
+   font_snow  = win->GetFont("Data/Fonts/ChristmasSnow.ttf" , -232);
+   
+   
    bool quit = false;
 
    while (!quit) {

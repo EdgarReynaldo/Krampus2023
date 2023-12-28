@@ -34,21 +34,12 @@ int Scene::Update(double dt) {
 
 
 
-Intro::Intro() :
-      font(0),
-      font_28days(0),
-      font_nuclear(0),
-      font_snow(0)
-{}
+Intro::Intro() {}
 
 
 
 int Intro::Init() {
    EAGLE_ASSERT(win);
-   font = win->GetFont("Data/Fonts/Verdana.ttf" , -72);
-   font_28days = win->GetFont("Data/Fonts/28DaysLater.ttf" , -108);
-   font_nuclear = win->GetFont("Data/Fonts/CFNuclearWarRegular.ttf" , -108);
-   font_snow  = win->GetFont("Data/Fonts/ChristmasSnow.ttf" , -232);
    
    if (font && font_28days && font_nuclear && font_snow) {
       return SCENE_READY;
@@ -60,7 +51,7 @@ int Intro::Init() {
 
 void Intro::Display() {
    EAGLE_ASSERT(win);
-   int a = (elapsed>=10)?255:255*(elapsed/10.0);
+   int a = (elapsed>=5.0)?255:255*(elapsed/5.0);
    if (elapsed <= 10.0) {
       win->DrawTextString(font_28days , StringPrintF("MARS COLONY ALPHA") , 960 , 515 , EagleColor(255,64,64,a) , HALIGN_CENTER , VALIGN_BOTTOM);
       win->DrawTextString(font_nuclear , StringPrintF("DEUS EX MOKKANISTA") , 960 , 565 , EagleColor(192,32,32,a) , HALIGN_CENTER , VALIGN_TOP);
@@ -84,7 +75,7 @@ int Intro::Update(double dt) {
 
 
 int GameScene::Init() {
-   grid.Resize(60 , 60 , 32.0);
+   grid.Resize(60 , 34 , 32.0);
    return SCENE_READY;
 }
 
