@@ -2,7 +2,7 @@
 
 
 
-#ifndef GaneResources_HPP
+#ifndef GameResources_HPP
 #define GameResources_HPP
 
 #include <map>
@@ -11,51 +11,51 @@
 
 
 enum RESTYPE {
-   RES_OXYGEN = 0,
-   RES_FOOD   = 1,
-   RES_ENERGY = 2,
-   RES_GOLD   = 3,
-   RES_METAL  = 4,
-   RES_MINERAL= 5,
-   NUM_RES_TYPES = 6
+   RES_OXYGEN    = 0,
+   RES_FOOD      = 1,
+   RES_WATER     = 2,
+   RES_ENERGY    = 3,
+   RES_GOLD      = 4,
+   RES_METAL     = 5,
+   RES_MINERAL   = 6,
+   NUM_RES_TYPES = 7
 };
 
 
 
 class Resource {
 public :
-   RESTYPE restype;
-   int quantity;
-   int quality;/// Multiply by 10^quality to get value, from 0-9
-   Resource(int qnt , int qlt , RESTYPE rt) : restype(rt) , quantity(qnt) , quality(qlt) {}
+   RESTYPE rt;
+   int val;
+
+   Resource();
+   Resource(RESTYPE restype , int value);
+   
+   Resource operator-();
 };
 
-class ResourceTracker {
+
+
+class ResourceWallet {
 protected :
-   
-   std::map<RESTYPE , std::vector<Resource> > resmap;
+   std::vector<Resource> rwallet;
    
 public :
    
-   ResourceTracker();
-   
+   ResourceWallet();
+   ResourceWallet(std::vector<int> values);
 
-   void Acquire(Resource r);
+   ResourceWallet& Acquire(Resource r);
+   ResourceWallet& Spend(Resource r);
+   ResourceWallet& Trade(ResourceWallet& other , Resource ours , Resource theirs);
 
-   Resource Release(Resource r);
-
-   void Trade(ResourceTracker& other , Resource ours , Resource theirs);
-
-
-   static void BalanceValue(ResourceTracker& r , RESTYPE rtype);
-   static int TotalValue(ResourceTracker& rt , RESTYPE rtype);
+   int TotalValue();
 };
 
 
 
 
-
-#endif // Resources_HPP
+#endif // GameResources_HPP
 
 
 

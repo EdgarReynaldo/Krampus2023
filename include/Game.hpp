@@ -16,7 +16,6 @@ class Allegro5SoundManager;
 class EagleGraphicsContext;
 class Scene;
 
-#include <hash_set>
 #include <vector>
 
 class Game {

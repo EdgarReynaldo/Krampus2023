@@ -34,7 +34,7 @@ bool Game::Init(std::vector<std::string> args) {
    screen_set.push_back(new GameScene());
    screen_vec.push_back(screen_set[0]);
    nextscene = screen_set[1];
-   if (screen_set[0]->Init() && screen_set[1]->Init()) {
+   if (screen_set[0]->Init() == SCENE_READY && screen_set[1]->Init() == SCENE_READY) {
 
    }
    else {
@@ -63,17 +63,18 @@ void Game::Run() {
             quit = true;
          }
          else if (e.type == EAGLE_EVENT_KEY_DOWN && e.keyboard.keycode == EAGLE_KEY_ESCAPE) {
-            if (!screen_vec.empty()) {
+            if (screen_vec.empty()) {
+               quit = true;
+            }
+            else {
                if (nextscene) {
                   screen_vec.back() = nextscene;
+                  nextscene = 0;
                }
                else {
                   screen_vec.pop_back();
                }
                redraw = true;
-            }
-            else {
-               quit = true;
             }
          }
          else if (e.type == EAGLE_EVENT_TIMER) {

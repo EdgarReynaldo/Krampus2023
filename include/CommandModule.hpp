@@ -6,20 +6,36 @@
 #define CommandModule_HPP
 
 
-#include "Eagle/Events.hpp"
+#include "Resources.hpp"
 #include "Component.hpp"
 
-#include <string>
+#include <unordered_set>
+
+
 
 class CommandModule : public Component {
 protected :
+   std::unordered_set<Component*> comp_set;
 
+   ResourceWallet storage;
+   
 public :
-   virtual void HandleEvent(EagleEvent e) override;
+//   CommandModule();   
+//CommandModule::CommandModule() :
+CommandModule() :
+      comp_set(),
+      storage()
+{}
+   virtual ~CommandModule() {}
+   
+   virtual void HandleEvent(EagleEvent e);
 
-   virtual void Display(EagleGraphicsContext* win) override;
+   virtual void Display(EagleGraphicsContext* win);
 
-   virtual void Update(int timer_ticks) override;
+   virtual void Update(int timer_ticks);
+
+   virtual ResourceWallet IncomePerTurn() override;
+   virtual ResourceWallet CostPerTurn() override;
 };
 
 
