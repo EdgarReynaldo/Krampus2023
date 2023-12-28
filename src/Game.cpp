@@ -8,6 +8,8 @@
 
 #include "Resources.hpp"
 #include "Scene.hpp"
+#include "Intro.hpp"
+#include "GameScene.hpp"
 #include "ExMokkan.hpp"
 
 
