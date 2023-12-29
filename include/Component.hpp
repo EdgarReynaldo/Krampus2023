@@ -14,16 +14,20 @@
 class EagleGraphicsContext;
 
 
+class HexTile;
+
 
 class Component {
-   
+
 public :
-   
-//   Component();
-Component() {}
-   
+
+   HexTile* ourtile;
+
+
+   Component();
+
    virtual ~Component() {}
-   
+
    virtual void HandleEvent(EagleEvent e);
 
    virtual void Display(EagleGraphicsContext* win);

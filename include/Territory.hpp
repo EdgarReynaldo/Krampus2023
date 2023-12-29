@@ -19,14 +19,14 @@ extern const unsigned int BADTID;
 
 class Territory {
    int owner;
-   
+
    std::unordered_set<HexTile*> tlist;/// Territory list
    std::unordered_set<HexTile*> blist;/// Border list
-   
-   
-   friend class TerritoryList;
-   friend class HexGrid;
-   
+
+
+//   friend class TerritoryList;
+//   friend class HexGrid;
+
 public :
 
 //   Territory(HexTile* tile);
@@ -38,14 +38,14 @@ public :
 
    void AddTile(HexTile* tile);
    void RemoveTile(HexTile* tile);
-   
+
    void RemoveBorderTile(HexTile* tile);
-   
+
    bool Contains(HexTile* tile);
    bool Borders(HexTile* tile);
 };
 
-
+/**
 class TerritoryList {
 //   int owner;
    std::map<unsigned int , Territory*> tlist;/// <territory id , Territory>
@@ -54,27 +54,27 @@ class TerritoryList {
 
    friend class HexGrid;
    friend class HexGame;
-   
-   
+
+
 public :
-      
+
 
 //   TerritoryList();
    TerritoryList() :
          tlist()
    {}
-      
+
    unsigned int AddTile(HexTile* tile);/// Returns territory id
    void RemoveTile(HexTile* tile);
 
    void RemoveBorderTile(HexTile* tile);
-   
+
    unsigned int Contains(HexTile* tile);
    std::unordered_set<unsigned int> Borders(HexTile* tile);
 
    unsigned int GetTID(HexTile* tile);
 };
-
+//*/
 
 
 

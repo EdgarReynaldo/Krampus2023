@@ -6,18 +6,19 @@
 #define Hexagon_HPP
 
 
+
 #include <unordered_set>
 #include <vector>
-#include <map>
-
+#include <string>
 
 #include "allegro5/allegro.h"
 #include "allegro5/allegro_primitives.h"
 
 
-#include <string>
 
 class EagleGraphicsContext;
+
+
 
 enum HEXCORNER {
    HC_EAST         = 0,
@@ -28,6 +29,8 @@ enum HEXCORNER {
    HC_NORTHEAST    = 5,
    NUM_HEX_CORNERS = 6
 };
+
+
 
 enum HEXDIRECTION {
    HD_NORTH     = 0,
@@ -43,6 +46,7 @@ enum HEXDIRECTION {
 std::string HexDirectionToString(HEXDIRECTION d);
 
 double HexDirectionToAngle(HEXDIRECTION d);
+
 HEXDIRECTION AngleToHexDirection(double arad);
 
 void TestAngleToHexDirection();
@@ -52,22 +56,25 @@ void TestAngleToHexDirection();
 class Hexagon {
    double radius;
    std::vector<ALLEGRO_VERTEX> verts;
-   
+
    void GenPoints();
 
 
 public :
    Hexagon() : radius(0.0) , verts(NUM_HEX_DIRECTIONS , ALLEGRO_VERTEX()) {}
    Hexagon(double width);
-   
+
    std::vector<ALLEGRO_VERTEX> GetVerts() {return verts;}
-   
-   
+
+
    void SetRadius(double r);
    void DrawFilled(EagleGraphicsContext* win , double x , double y , ALLEGRO_COLOR color);
    void DrawOutline(EagleGraphicsContext* win , double x , double y , ALLEGRO_COLOR color);
 };
 
+
+
+class Component;
 
 
 class HexTile {
@@ -85,23 +92,25 @@ class HexTile {
    std::unordered_set<HEXDIRECTION> border_tty;/// Border territories we do not own
 
    std::vector<HexTile*> neighbors;
-   
-   
+
+   Component* component;
+
+
    friend class HexGrid;
    friend class Territory;
    friend class TerritoryList;
    friend std::unordered_set<HexTile*>& GetAdjoiningTiles(std::unordered_set<HexTile*>& , HexTile*);
    friend std::unordered_set<HexTile*> GetBorders(std::unordered_set<HexTile*>);
-   
+
    /// unsigned int TID
-   
+
    void CalcBorders();
-   
+
 public :
    HexTile();
-   
+
    void SetRadius(double r);
-   
+
    void DrawFilled(EagleGraphicsContext* win , double xpos , double ypos , ALLEGRO_COLOR color);
    void DrawOutline(EagleGraphicsContext* win , double xpos , double ypos ,  ALLEGRO_COLOR color);
    void DrawStats(EagleGraphicsContext* win , double xpos , double ypos , ALLEGRO_COLOR color);
@@ -119,24 +128,24 @@ class Player;
 
 class HexGrid {
    unsigned int w,h,rad;
-   
+
    std::vector<std::vector<HexTile> > grid;
-   
+
    friend class HexGame;
-   
-   
+
+
    bool CheckGrid();
-   
+
 public :
    HexGrid();
-   
+
    void Resize(unsigned int width , unsigned int height , double radius);
 
    void DrawGrid(EagleGraphicsContext* win , int xpos , int ypos);
 
    unsigned int Width() {return w;}
    unsigned int Height() {return h;}
-   
+
    bool Safe(HexTile* tile);
 };
 

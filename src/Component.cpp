@@ -3,8 +3,17 @@
 
 
 #include "Component.hpp"
+#include "Hexagon.hpp"
+
+
 #include "Eagle/GraphicsContext.hpp"
 
+
+
+
+Component::Component() :
+      ourtile(0)
+{}
 
 
 

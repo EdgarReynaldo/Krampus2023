@@ -8,12 +8,14 @@
 
 #include "Scene.hpp"
 #include "Hexagon.hpp"
-
+#include "Territory.hpp"
 
 
 class GameScene : public Scene {
 protected :
    HexGrid grid;
+   Territory tory;
+
 public :
 
    virtual int Init();

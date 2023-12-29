@@ -5,10 +5,9 @@
 #include "Hexagon.hpp"
 
 
-#include <string>
 #include <cmath>
 #ifndef M_PI
-   #define M_PI 3.1415269
+   #define M_PI 3.14159265
 #endif
 
 
@@ -16,7 +15,7 @@
 #include "Eagle/backends/Allegro5Backend.hpp"
 #include "allegro5/allegro.h"
 #include "allegro5/allegro_primitives.h"
-
+#include "Component.hpp"
 #include "Territory.hpp"
 
 
@@ -49,7 +48,7 @@ double HexDirectionToAngle(HEXDIRECTION d) {
 
 
 HEXDIRECTION AngleToHexDirection(double arad) {
-   
+
    /// North in Allegro is actually 270 degrees, so add a 1/4 turn clockwise to make North zero
    /// We want North to be from 240 degrees to 300 degrees (allegro degrees) so add 120 degrees
    arad += 2.0*M_PI/3.0;/// Adjust for the middle of the hex direction by turn cw 1/12
@@ -112,7 +111,7 @@ void Hexagon::SetRadius(double r) {
 
 
 
-void Hexagon::DrawFilled(EagleGraphicsContext* win , double xpos , double ypos , ALLEGRO_COLOR color) { 
+void Hexagon::DrawFilled(EagleGraphicsContext* win , double xpos , double ypos , ALLEGRO_COLOR color) {
    (void)win;
    std::vector<float> vtx(2*verts.size() , 0.0);
    for (unsigned int i = 0 ; i < NUM_HEX_CORNERS ; ++i) {
@@ -124,7 +123,7 @@ void Hexagon::DrawFilled(EagleGraphicsContext* win , double xpos , double ypos ,
 
 
 
-void Hexagon::DrawOutline(EagleGraphicsContext* win , double xpos , double ypos , ALLEGRO_COLOR color) { 
+void Hexagon::DrawOutline(EagleGraphicsContext* win , double xpos , double ypos , ALLEGRO_COLOR color) {
    (void)win;
    std::vector<float> vtx(2*verts.size() , 0.0);
    for (unsigned int i = 0 ; i < NUM_HEX_CORNERS ; ++i) {
@@ -144,7 +143,7 @@ Hexagon HexTile::proto;
 
 
 
-HexTile::HexTile() : 
+HexTile::HexTile() :
       tx(-1),
       ty(-1),
       mx(-1.0),
@@ -152,7 +151,8 @@ HexTile::HexTile() :
       owner(0),
       neighbor_tty(),
       border_tty(),
-      neighbors(6 , NULL)
+      neighbors(6 , NULL),
+      component(0)
 {}
 
 
@@ -213,11 +213,11 @@ std::unordered_set<HexTile*> GetAdjoiningTiles(HexTile* start) {
 
 
 std::unordered_set<HexTile*>& GetAdjoiningTiles(std::unordered_set<HexTile*>& tset , HexTile* prev) {
-   
+
    if (!prev) {return tset;}
-   
+
    /// O(n) territory traversal by neighbor
-   
+
    /// For every neighbor territory, add to list and get adjoining tiles if not on list
    const std::unordered_set<HEXDIRECTION>& nbset = prev->neighbor_tty;
    std::unordered_set<HEXDIRECTION>::const_iterator it = nbset.begin();
@@ -243,7 +243,7 @@ std::unordered_set<HexTile*> GetBorders(std::unordered_set<HexTile*> tty) {
    /// We already have the border territories stored in our hex tile, just extract them
    /// O(N) on number of territory / border connections
    std::unordered_set<HexTile*> newborders;
-   
+
    std::unordered_set<HexTile*>::iterator it = tty.begin();
    while (it != tty.end()) {
       HexTile* current = *it;
@@ -258,9 +258,9 @@ std::unordered_set<HexTile*> GetBorders(std::unordered_set<HexTile*> tty) {
    return newborders;
 
    /// OLD, inefficient
-   
+
    /// Brute force network traversal , O(N)
-   
+
    std::unordered_set<HexTile*> borders;
    if (tty.empty()) {
       return borders;
@@ -288,7 +288,7 @@ std::unordered_set<HexTile*> GetBorders(std::unordered_set<HexTile*> tty) {
       }
       ++it;
    }
-   
+
    return borders;
 }
 
@@ -330,7 +330,7 @@ HexGrid::HexGrid() :
 
 
 void HexGrid::Resize(unsigned int width , unsigned int height , double radius) {
-   
+
    w = width;
    h = height;
    rad = radius;
@@ -339,7 +339,7 @@ void HexGrid::Resize(unsigned int width , unsigned int height , double radius) {
    grid.resize(height , std::vector<HexTile>(width , HexTile()));
 
    static const double root3 = sqrt(3);
-   
+
    /// Width and height of grid
    const double dx = 1.5*rad;
    const double dy = root3*rad;
@@ -353,23 +353,23 @@ void HexGrid::Resize(unsigned int width , unsigned int height , double radius) {
       for (unsigned int col = 0 ; col < width ; ++col) {
          double ly = (col%2==0)?y:(y-dy/2.0);/// Offset odd columns up by dy
          double x = lx + dx*col;
-         
+
          HexTile* hex = &grid[row][col];
-         
+
          hex->mx = x;
          hex->my = ly;
-         
+
          hex->tx = col;
          hex->ty = row;
 
          hex->neighbors.clear();
          hex->neighbors.resize(6 , NULL);
-         
+
          /// In a hex grid, n sometimes changes the y value
          /// In a hex grid, s doesn't always change the y value
          const int N = (col%2==0)?row:row-1;
          const int S = (col%2==0)?row+1:row;
-         
+
          /// SOUTH
          if (row < height - 1) {
             hex->neighbors[HD_SOUTH] = &grid[row + 1][col];

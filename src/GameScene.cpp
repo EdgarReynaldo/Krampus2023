@@ -11,14 +11,14 @@
 
 
 int GameScene::Init() {
-   grid.Resize(60 , 34 , 32.0);
+   grid.Resize(32 , 18 , 60.0);
    return SCENE_READY;
 }
 
-
+//1920/60 = 32
+//1080/60 = 18;
 
 void GameScene::Display() {
-   EAGLE_ASSERT(win);
    grid.DrawGrid(win , 0 , 0);
 }
 
@@ -32,9 +32,6 @@ bool GameScene::HandleEvent(EagleEvent e) {
 
 int GameScene::Update(double dt) {
    Scene::Update(dt);
-   if (elapsed > 10.0) {
-      return SCENE_QUIT;
-   }
    return SCENE_RUNNING;
 }
 
