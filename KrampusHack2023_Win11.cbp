@@ -8,8 +8,8 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="KH23D" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="./" />
+				<Option output="bin/KH23D" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -24,8 +24,8 @@
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="KH23" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="./" />
+				<Option output="bin/KH23" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -39,8 +39,8 @@
 				</Linker>
 			</Target>
 			<Target title="StaticDebug">
-				<Option output="KH23DS" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="./" />
+				<Option output="bin/KH23DS" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -86,8 +86,8 @@
 				</Linker>
 			</Target>
 			<Target title="StaticRelease">
-				<Option output="KH23S" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="./" />
+				<Option output="bin/KH23S" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -144,10 +144,10 @@
 			<Add option="-DEAGLE_ASSERT_EXCEPTION" />
 			<Add option="-DDEBUG" />
 			<Add directory="include" />
-			<Add directory="E:/usr64/include" />
+			<Add directory="C:/usr64/include" />
 		</Compiler>
 		<Linker>
-			<Add directory="E:/usr64/lib" />
+			<Add directory="C:/usr64/lib" />
 		</Linker>
 		<Unit filename="ExMokkan.cpp" />
 		<Unit filename="include/CommandModule.hpp" />
