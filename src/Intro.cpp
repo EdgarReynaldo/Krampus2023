@@ -30,12 +30,12 @@ void Intro::Display() {
    EAGLE_ASSERT(win);
    int a = (elapsed>=5.0)?255:255*(elapsed/5.0);
    if (elapsed <= 10.0) {
-      win->DrawTextString(font_28days , StringPrintF("MARS COLONY ALPHA") , 960 , 515 , EagleColor(255,64,64,a) , HALIGN_CENTER , VALIGN_BOTTOM);
-      win->DrawTextString(font_nuclear , StringPrintF("DEUS EX MOKKANISTA") , 960 , 565 , EagleColor(192,32,32,a) , HALIGN_CENTER , VALIGN_TOP);
+      win->DrawTextString(font_snow , StringPrintF("Krampus Hack") , 960 , 530 , EagleColor(255,255,255,a) , HALIGN_CENTER , VALIGN_BOTTOM);
+      win->DrawTextString(font_snow , StringPrintF("2023") , 960 , 550 , EagleColor(255,255,255,a) , HALIGN_CENTER , VALIGN_TOP);
    }
    else if (elapsed <= 20.0) {
-      win->DrawTextString(font_snow , StringPrintF("Krampus Hack") , 960 , 530 , EagleColor(255,255,255,255) , HALIGN_CENTER , VALIGN_BOTTOM);
-      win->DrawTextString(font_snow , StringPrintF("2023") , 960 , 550 , EagleColor(255,255,255,255) , HALIGN_CENTER , VALIGN_TOP);
+      win->DrawTextString(font_28days , StringPrintF("MARS COLONY ALPHA") , 960 , 515 , EagleColor(255,64,64,255) , HALIGN_CENTER , VALIGN_BOTTOM);
+      win->DrawTextString(font_nuclear , StringPrintF("DEUS EX MOKKANISTA") , 960 , 565 , EagleColor(192,32,32,255) , HALIGN_CENTER , VALIGN_TOP);
    }
 }
 

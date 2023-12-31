@@ -27,7 +27,8 @@ extern EagleFont* font_28days;
 extern EagleFont* font_nuclear;
 extern EagleFont* font_snow;
 
-
+extern int SCREEN_WIDTH;
+extern int SCREEN_HEIGHT;
 
 
 #endif // ExMokkan_HPP

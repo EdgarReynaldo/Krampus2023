@@ -24,10 +24,8 @@ protected :
    bool redraw;
 
    std::vector<Scene*> screen_set;
-   std::vector<Scene*> screen_vec;
 
-   Scene* nextscene;
-
+   Scene* current_scene;
 
 public :
 //   Game();

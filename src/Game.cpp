@@ -9,6 +9,7 @@
 #include "Resources.hpp"
 #include "Scene.hpp"
 #include "Intro.hpp"
+#include "Story.hpp"
 #include "GameScene.hpp"
 #include "ExMokkan.hpp"
 
@@ -19,8 +20,7 @@ Game::Game() :
       quit(false),
       redraw(true),
       screen_set(),
-      screen_vec(),
-      nextscene(0)
+      current_scene(0)
 {}
 
 
@@ -33,11 +33,17 @@ bool Game::Init(std::vector<std::string> args) {
    win->FlipDisplay();
 
    screen_set.push_back(new Intro());
+   screen_set.push_back(new Story());
    screen_set.push_back(new GameScene());
-   screen_vec.push_back(screen_set[0]);
-   nextscene = screen_set[1];
-   if (screen_set[0]->Init() == SCENE_READY && screen_set[1]->Init() == SCENE_READY) {
-
+//   nextscene = screen_set[1];
+//   screen_vec.push_back(screen_set[1]);
+//   screen_vec.push_back(screen_set[2]);
+   if ((screen_set[0]->Init() == SCENE_READY) &&
+       (screen_set[1]->Init() == SCENE_READY) &&
+       (screen_set[2]->Init() == SCENE_READY)) {
+      screen_set[0]->nextscene = screen_set[1];
+      screen_set[1]->nextscene = screen_set[2];
+      current_scene = screen_set[0];
    }
    else {
       EagleError() << "Failed to initialize all screens." << std::endl;
@@ -53,8 +59,8 @@ void Game::Run() {
    while (!quit) {
       if (redraw) {
          win->Clear();
-         for (unsigned int i = 0 ; i < screen_vec.size() ; ++i) {
-            screen_vec[i]->Display();
+         if (current_scene) {
+            current_scene->Display();
          }
          win->FlipDisplay();
          redraw = false;
@@ -65,42 +71,22 @@ void Game::Run() {
             quit = true;
          }
          else if (e.type == EAGLE_EVENT_KEY_DOWN && e.keyboard.keycode == EAGLE_KEY_ESCAPE) {
-            if (screen_vec.empty()) {
-               quit = true;
-            }
-            else {
-               if (nextscene) {
-                  screen_vec.back() = nextscene;
-                  nextscene = 0;
-               }
-               else {
-                  screen_vec.pop_back();
-               }
-               redraw = true;
-            }
+            current_scene = current_scene->nextscene;
+            if (!current_scene) {quit = true;}
+            redraw = true;
          }
          else if (e.type == EAGLE_EVENT_TIMER) {
-            for (int i = screen_vec.size() - 1 ; i >= 0 ; --i) {
-               if (screen_vec[i]->Update(e.timer.eagle_timer_source->SPT()) == SCENE_QUIT) {
-                  if (nextscene) {
-                     screen_vec[i] = nextscene;
-                  }
-                  else {
-                     std::vector<Scene*>::iterator it = screen_vec.begin();
-                     int j = i;
-                     while (j--) {
-                        ++it;
-                     }
-                     screen_vec.erase(it);
-                  }
+            if (current_scene) {
+               int ret = current_scene->Update(e.timer.eagle_timer_source->SPT());
+               if (ret == SCENE_COMPLETE) {
+                  current_scene = current_scene->nextscene;
+                  if (!current_scene) {quit = true;}
                }
             }
             redraw = true;
          }
-         for (int i = screen_vec.size() - 1 ; i >= 0 ; --i) {
-            if (screen_vec[i]->HandleEvent(e)) {
-               break;
-            }
+         if (current_scene) {
+            current_scene->HandleEvent(e);
          }
       } while (!sys->UpToDate());
    }

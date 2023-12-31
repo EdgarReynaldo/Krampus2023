@@ -40,7 +40,8 @@ EagleFont* font_28days = 0;
 EagleFont* font_nuclear = 0;
 EagleFont* font_snow = 0;
 
-
+int SCREEN_WIDTH = 1920;
+int SCREEN_HEIGHT = 1080;
 
 #include "Game.hpp"
 
@@ -63,7 +64,10 @@ int main(int argc , char** argv) {
       EagleLog() << "Failed init states : " << std::endl;
       PrintFailedEagleInitStates(EAGLE_FULL_SETUP , ret);
    }
-   win = dynamic_cast<Allegro5GraphicsContext*>(sys->CreateGraphicsContext("A5 window" , 960 , 600 , EAGLE_FULLSCREEN_WINDOW , -1 , -1));
+   SCREEN_WIDTH = 1920;
+   SCREEN_HEIGHT = 1080;
+
+   win = dynamic_cast<Allegro5GraphicsContext*>(sys->CreateGraphicsContext("A5 window" , 1920 , 1080 , EAGLE_FULLSCREEN , -1 , -1));
    EAGLE_ASSERT(win);
 
    fsys = dynamic_cast<Allegro5FileSystem*>(sys->GetFileSystem());
@@ -76,8 +80,8 @@ int main(int argc , char** argv) {
    font_28days = win->GetFont("Data/Fonts/28DaysLater.ttf" , -108);
    font_nuclear = win->GetFont("Data/Fonts/CFNuclearWarRegular.ttf" , -108);
    font_snow  = win->GetFont("Data/Fonts/ChristmasSnow.ttf" , -232);
-   
-   
+
+
    bool quit = false;
 
    while (!quit) {

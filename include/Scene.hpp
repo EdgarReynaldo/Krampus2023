@@ -23,6 +23,8 @@ enum SCENE_STATUS {
 class Scene {
 public :
    double elapsed;
+   Scene* nextscene;
+
 
    Scene();
    virtual ~Scene() {}
