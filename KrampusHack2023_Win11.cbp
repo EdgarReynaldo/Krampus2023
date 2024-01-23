@@ -152,6 +152,7 @@
 		<Unit filename="ExMokkan.cpp" />
 		<Unit filename="include/CommandModule.hpp" />
 		<Unit filename="include/Component.hpp" />
+		<Unit filename="include/Credits.hpp" />
 		<Unit filename="include/ExMokkan.hpp" />
 		<Unit filename="include/Game.hpp" />
 		<Unit filename="include/GameScene.hpp" />
@@ -163,6 +164,7 @@
 		<Unit filename="include/Territory.hpp" />
 		<Unit filename="src/CommandModule.cpp" />
 		<Unit filename="src/Component.cpp" />
+		<Unit filename="src/Credits.cpp" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/GameScene.cpp" />
 		<Unit filename="src/Hexagon.cpp" />
