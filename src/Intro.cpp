@@ -41,10 +41,19 @@ void Intro::Display() {
 
 
 
+bool Intro::HandleEvent(EagleEvent e) {
+   if (e.type == EAGLE_EVENT_KEY_DOWN) {
+      elapsed = 20.0;
+   }
+   return false;
+}
+
+
+
 int Intro::Update(double dt) {
    (void)Scene::Update(dt);
-   if (elapsed > 20.0) {
-      return SCENE_QUIT;
+   if (elapsed >= 20.0) {
+      return SCENE_COMPLETE;
    }
    return SCENE_RUNNING;
 }

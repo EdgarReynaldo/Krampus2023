@@ -10,6 +10,7 @@
 #include "Scene.hpp"
 #include "Intro.hpp"
 #include "Story.hpp"
+#include "Credits.hpp"
 #include "GameScene.hpp"
 #include "ExMokkan.hpp"
 
@@ -34,7 +35,8 @@ bool Game::Init(std::vector<std::string> args) {
 
    screen_set.push_back(new Intro());
    screen_set.push_back(new Story());
-   screen_set.push_back(new GameScene());
+   screen_set.push_back(new Credits());
+///   screen_set.push_back(new GameScene());
 //   nextscene = screen_set[1];
 //   screen_vec.push_back(screen_set[1]);
 //   screen_vec.push_back(screen_set[2]);
@@ -81,6 +83,9 @@ void Game::Run() {
                if (ret == SCENE_COMPLETE) {
                   current_scene = current_scene->nextscene;
                   if (!current_scene) {quit = true;}
+               }
+               else if (ret == SCENE_QUIT) {
+                  quit = true;
                }
             }
             redraw = true;

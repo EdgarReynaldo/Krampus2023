@@ -31,11 +31,13 @@ int Story::Init() {
 
 void Story::Display() {
    win->Clear();
-   double pct = elapsed>20.0?1.0:elapsed/20.0;
+   double pct = elapsed/20.0;
    Transform t = win->GetTransformer()->GetIdentityTransform();
-   t.Translate(-mars->W()/2.0 , -mars->H()/2.0);
+   t.Translate(-SCREEN_WIDTH/2.0 , -SCREEN_HEIGHT/2.0);
+//   t.Translate(-mars->W()/2.0 , -mars->H()/2.0);
    t.Scale(pct , pct);
-   t.Translate(mars->W()/2.0 , mars->H()/2.0);
+   t.Translate(SCREEN_WIDTH/2.0 , SCREEN_HEIGHT/2.0);
+//   t.Translate(mars->W()/2.0 , mars->H()/2.0);
    win->PushViewTransform(t);
    win->DrawImageCenter(mars , Rectangle(0 , 0 , SCREEN_WIDTH , SCREEN_HEIGHT));
    win->PopViewTransform();
@@ -46,9 +48,9 @@ void Story::Display() {
    else if (elapsed < 15.0) {
       c.SetColor(255,255,0,255);
    }
-   win->DrawTextString(font_28days , StringPrintF("%5.0f kM away" , 5000.0*(1.0-pct)) ,
+   win->DrawTextString(font_28days , StringPrintF("%5.0f kM away" , 10000.0*(1.0-pct/2.0)) ,
                         SCREEN_WIDTH/2.0 , 10.0 , c , HALIGN_CENTER , VALIGN_TOP);
-   if (elapsed >= 15.0) {
+   if (elapsed >= 25.0) {
       win->DrawTextString(font_28days , "Final Approach" , SCREEN_WIDTH/2.0 , SCREEN_HEIGHT - 10 ,
                            c , HALIGN_CENTER , VALIGN_BOTTOM);
    }
@@ -65,7 +67,7 @@ bool Story::HandleEvent(EagleEvent e) {
 
 int Story::Update(double dt) {
    Scene::Update(dt);
-   if (elapsed >= 20.0) {
+   if (elapsed >= 40.0) {
       return SCENE_COMPLETE;
    }
    return SCENE_RUNNING;

@@ -18,6 +18,7 @@ public :
    virtual int Init() override;
 
    virtual void Display() override;
+   virtual bool HandleEvent(EagleEvent e) override;
    virtual int Update(double dt) override;
 
 };

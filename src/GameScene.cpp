@@ -11,7 +11,7 @@
 
 
 int GameScene::Init() {
-   grid.Resize(32 , 18 , 60.0);
+   grid.Resize(21 , 10 , 60.0);
    return SCENE_READY;
 }
 
@@ -19,7 +19,7 @@ int GameScene::Init() {
 //1080/60 = 18;
 
 void GameScene::Display() {
-   grid.DrawGrid(win , 0 , 0);
+   grid.DrawGrid(win , 60 , 52);
 }
 
 
